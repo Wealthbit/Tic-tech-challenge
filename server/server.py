@@ -3,7 +3,7 @@ from flask import Flask, after_this_request, request
 app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
-def hello_world():
+def aiMove():
     @after_this_request
     def add_header(response):
         response.headers['Access-Control-Allow-Origin'] = '*'

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('#current-player').innerHTML = 'x'
 
   for (const [blockIndex, block] of blocks.entries()) {
-    block.onclick = blockClickFunction(blockIndex, game)
+    block.onclick = blockClickFunction(blockIndex, game) // 1
   }
 })
 
@@ -20,17 +20,19 @@ const setupGame = (startingPlayer, blocks) => {
   let gameObject = {
     currentPlayer: startingPlayer,
     gameOver: false,
-    board: [null, null, null, null, null, null, null, null, null],
+    board: [null, null, null, null, null, null, null, null, null], // 2
     blocks,
     markBlock,
-    checkWin,
+    checkForWinner,
     togglePlayer,
     playerWon,
     aiMove
   }
+  // 3
   return () => gameObject
 }
 
+// 4
 function markBlock (index) {
   if (!this.gameOver && !this.board[index]) {
     this.blocks[index].classList.add(this.currentPlayer)
@@ -38,10 +40,10 @@ function markBlock (index) {
     this.board[index] = this.currentPlayer
     this.togglePlayer()
   }
-  this.checkWin()
+  this.checkForWinner()
 }
 
-function checkWin () {
+function checkForWinner () {
   const WIN_CONDITIONS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -52,7 +54,8 @@ function checkWin () {
     [0, 4, 8],
     [2, 4, 6]
   ]
-
+  // Complete the checkForWinner funciton using the WIN_CONDITIONS provided above
+  // Try and use native array methods :)
   WIN_CONDITIONS.forEach((winCondition) => {
     winCondition.every((blockIndex) => this.board[blockIndex] === 'x') && this.playerWon('x')
     winCondition.every((blockIndex) => this.board[blockIndex] === 'o') && this.playerWon('o')
@@ -60,7 +63,6 @@ function checkWin () {
 }
 
 function togglePlayer () {
-  console.log('toggling player', this.currentPlayer)
   if (this.currentPlayer === 'x') {
     this.currentPlayer = 'o'
   } else {
@@ -74,6 +76,7 @@ function playerWon (player) {
   this.winningPlayer = player
 }
 
+// 5
 async function aiMove () {
   if (!this.gameOver) {
     const res = await fetch(
