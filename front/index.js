@@ -72,7 +72,6 @@ function togglePlayer () {
 
 function playerWon (player) {
   this.togglePlayer()
-  this.gameOver = true
   this.winningPlayer = player
 }
 
