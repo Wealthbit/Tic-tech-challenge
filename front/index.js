@@ -56,10 +56,6 @@ function checkForWinner () {
   ]
   // Complete the checkForWinner funciton using the WIN_CONDITIONS provided above
   // Try and use native array methods :)
-  WIN_CONDITIONS.forEach((winCondition) => {
-    winCondition.every((blockIndex) => this.board[blockIndex] === 'x') && this.playerWon('x')
-    winCondition.every((blockIndex) => this.board[blockIndex] === 'o') && this.playerWon('o')
-  })
 }
 
 function togglePlayer () {
